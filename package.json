@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "hapi": "^17.5.1"
+  },
+  "devDependencies": {
+    "prettier": "^1.13.4"
+  }
+}
