@@ -1,31 +1,17 @@
-'use strict';
+const http = require('http')
+const port = 3000
 
-const Hapi = require('hapi');
-
-// Create a server with a host and port
-const server = Hapi.server({
-  port: 8000,
-});
-
-// Add the route
-server.route({
-  method: 'GET',
-  path: '/',
-  handler: function(request, h) {
-    return `Process on the server: ${process.pid}`;
-  },
-});
-
-// Start the server
-async function start() {
-  try {
-    await server.start();
-  } catch (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  console.log('Server running at:', server.info.uri);
+const requestHandler = (request, response) => {
+  console.log(request.url)
+  response.end('Server process: ' + process.pid)
 }
 
-start();
+const server = http.createServer(requestHandler)
+
+server.listen(port, (err) => {
+  if (err) {
+    return console.log('something bad happened', err)
+  }
+
+  console.log(`server is listening on ${port}`)
+})
